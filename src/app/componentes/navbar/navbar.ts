@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgIf } from '@angular/common';
+import { AuthService } from '../../servicios/auth';
 
 @Component({
   selector: 'app-navbar',
@@ -12,13 +13,36 @@ import { NgIf } from '@angular/common';
 })
 export class Navbar {
   darkMode: boolean = false;
+  private authService = inject(AuthService);
 
   constructor(private router: Router) {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
       this.darkMode = true;
       document.body.classList.add('dark-mode');
+    } else {
+      this.darkMode = false;
+      document.body.classList.remove('dark-mode');
     }
+  }
+
+  user = this.authService.userSignal;
+
+  get isPaciente() {
+    return this.user()?.rol === 'paciente';
+  }
+  get isEspecialista() {
+    return this.user()?.rol === 'especialista';
+  }
+  get isAdmin() {
+    return this.user()?.rol === 'admin';
+  }
+
+  get homeRoute(): string {
+    if (this.isAdmin) return '/admin';
+    if (this.isEspecialista) return '/especialista';
+    if (this.isPaciente) return '/paciente';
+    return '/home';
   }
 
   get isHome(): boolean {
@@ -36,7 +60,8 @@ export class Navbar {
     }
   }
 
-  logout(): void {
-    this.router.navigate(['/login']);
+  async logout() {
+    await this.authService.logout();
+    this.router.navigate(['/home']);
   }
 }

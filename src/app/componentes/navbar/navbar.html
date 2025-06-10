@@ -1,13 +1,20 @@
 <mat-toolbar color="primary" class="navbar">
-  <span class="logo" routerLink="/">Clinica Braluanit</span>
+  <span class="logo" [routerLink]="homeRoute">Clinica Braluanit</span>
   <span class="spacer"></span>
 
-  <ng-container *ngIf="!isHome">
-    <button mat-button routerLink="/home">Home</button>
-    <button mat-button routerLink="/paciente">Paciente</button>
-    <button mat-button routerLink="/especialista">Especialista</button>
-    <button mat-button routerLink="/admin">Admin</button>
-    <button mat-button routerLink="/admin/usuarios">Admin Usuarios</button>
+  <!-- Paciente -->
+  <ng-container *ngIf="isPaciente">
+    <button mat-button (click)="logout()">Cerrar Sesión</button>
+  </ng-container>
+
+  <!-- Especialista -->
+  <ng-container *ngIf="isEspecialista">
+    <button mat-button (click)="logout()">Cerrar Sesión</button>
+  </ng-container>
+
+  <!-- Admin -->
+  <ng-container *ngIf="isAdmin">
+    <button mat-button routerLink="/admin/usuarios">Usuarios</button>
     <button mat-button (click)="logout()">Cerrar Sesión</button>
   </ng-container>
 

@@ -1,4 +1,4 @@
-import { Component, inject, Signal, signal } from '@angular/core';
+import { Component, computed, inject, Signal, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -17,6 +17,7 @@ import { MatCardModule } from '@angular/material/card';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AuthService } from '../../servicios/auth';
 
 @Component({
   selector: 'app-register',
@@ -43,6 +44,10 @@ export class RegisterComponent {
   private firestore = inject(Firestore);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
+  private authService = inject(AuthService);
+
+  // Computed: ¿es admin?
+  isAdmin = computed(() => this.authService.userSignal()?.rol === 'admin');
 
   public loading = false;
 
@@ -141,13 +146,23 @@ export class RegisterComponent {
       await setDoc(doc(this.firestore, 'usuarios', uid), data);
 
       await sendEmailVerification(user);
-      this.snackBar.open('Registro exitoso. Por favor verifica tu correo.', 'Cerrar', { duration: 3000 });
+      // Mensaje de éxito personalizado
+      if (this.isAdmin()) {
+        this.snackBar.open('Usuario creado exitosamente. Se envió un email de verificación al nuevo usuario.', 'Cerrar', { duration: 3000 });
+      } else {
+        this.snackBar.open('Registro exitoso. Por favor verifica tu correo.', 'Cerrar', { duration: 3000 });
+      }
 
       this.router.navigate(['/home']);
 
     } catch (err) {
       console.error(err);
-      this.snackBar.open('Error en el registro: ' + (err as Error).message, 'Cerrar', { duration: 3000 });
+      // Mensaje de error personalizado
+      if (this.isAdmin()) {
+        this.snackBar.open('Error al crear el usuario: ' + (err as Error).message, 'Cerrar', { duration: 3000 });
+      } else {
+        this.snackBar.open('Error en el registro: ' + (err as Error).message, 'Cerrar', { duration: 3000 });
+      }
     } finally {
       this.loading = false;
     }

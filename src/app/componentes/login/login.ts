@@ -31,7 +31,10 @@ export class LoginComponent {
     password: ['', [Validators.required]]
   });
 
+  tipoSeleccionado: 'paciente' | 'especialista' | 'admin' | null = null;
+
   autofill(tipo: 'paciente' | 'especialista' | 'admin') {
+    this.tipoSeleccionado = tipo;
     let email = '';
     let password = '';
     switch (tipo) {

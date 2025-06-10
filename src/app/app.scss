@@ -28,6 +28,8 @@
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
 @media screen and (max-width: 650px) {
@@ -43,7 +45,3 @@
         margin-block: 1.5rem;
     }
 }
-
-
-
-

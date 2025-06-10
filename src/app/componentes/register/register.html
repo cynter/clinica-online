@@ -6,7 +6,8 @@
     (click)="onTipoChange('especialista')">
     🩺 Especialista
   </button>
-  <button mat-raised-button [ngClass]="{ selected: tipoUsuario() === 'admin' }" (click)="onTipoChange('admin')">
+  <button *ngIf="isAdmin()" mat-raised-button [ngClass]="{ selected: tipoUsuario() === 'admin' }"
+    (click)="onTipoChange('admin')">
     🛠️ Administrador
   </button>
 </div>

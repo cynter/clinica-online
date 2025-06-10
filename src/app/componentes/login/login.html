@@ -20,10 +20,19 @@
         </ng-container>
       </button>
 
-      <div style="margin-bottom: 16px;">
-        <button mat-raised-button color="primary" type="button" (click)="autofill('paciente')">Paciente</button>
-        <button mat-raised-button color="accent" type="button" (click)="autofill('especialista')">Especialista</button>
-        <button mat-raised-button color="warn" type="button" (click)="autofill('admin')">Administrador</button>
+      <div class="autofill-btn-group">
+        <button mat-raised-button color="primary" type="button" (click)="autofill('paciente')"
+          [ngClass]="{ selected: tipoSeleccionado === 'paciente' }">
+          👤 Paciente
+        </button>
+        <button mat-raised-button color="accent" type="button" (click)="autofill('especialista')"
+          [ngClass]="{ selected: tipoSeleccionado === 'especialista' }">
+          🩺 Especialista
+        </button>
+        <button mat-raised-button color="warn" type="button" (click)="autofill('admin')"
+          [ngClass]="{ selected: tipoSeleccionado === 'admin' }">
+          🛠️ Administrador
+        </button>
       </div>
 
       <div *ngIf="loading" class="loader">Cargando...</div>

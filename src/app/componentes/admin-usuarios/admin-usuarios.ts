@@ -1,15 +1,15 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { collection, doc, updateDoc} from 'firebase/firestore';
+import { collection, doc, updateDoc } from 'firebase/firestore';
 import { collectionData, Firestore } from '@angular/fire/firestore';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { Observable } from 'rxjs';
-import { RegisterComponent } from '../register/register';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admin-usuarios',
-  imports: [CommonModule, MatTableModule, MatButtonModule, RegisterComponent],
+  imports: [CommonModule, MatTableModule, MatButtonModule, RouterLink],
   templateUrl: './admin-usuarios.html',
   styleUrl: './admin-usuarios.scss'
 })
