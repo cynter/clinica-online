@@ -1,0 +1,21 @@
+.navbar {
+  background: var(--red-to-pink-to-purple-horizontal-gradient);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+
+  .logo {
+    font-weight: bold;
+    font-size: 1.3rem;
+    cursor: pointer;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  button {
+    color: white;
+  }
+}

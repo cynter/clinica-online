@@ -1,0 +1,40 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: var(--card-bg); // fondo basado en modo actual
+    padding: 1rem;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px var(--shadow);
+    text-align: center;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+
+    h2 {
+        margin-bottom: 1.5rem;
+        color: var(--button-bg);
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+}
+
+.full-width {
+    width: 100%;
+}
+
+.loader {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}

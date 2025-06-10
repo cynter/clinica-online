@@ -1,1 +1,48 @@
-/* You can add global styles to this file, and also import other style files */
+#global-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    inset: 0;
+    background-color: white;
+    z-index: 9999;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; // Muy importante
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+:root {
+    --text-color: #000;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --button-bg: #3f51b5;
+    --button-accent: #e91e63;
+    --shadow: rgba(0, 0, 0, 0.3);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #fff;
+        --card-bg: rgba(0, 0, 0, 0.75);
+        --button-bg: #90caf9;
+        --button-accent: #f48fb1;
+        --shadow: rgba(255, 255, 255, 0.1);
+    }
+}
+
+body.dark-mode {
+    --text-color: #fff;
+    --card-bg: rgba(0, 0, 0, 0.75);
+    --button-bg: #90caf9;
+    --button-accent: #f48fb1;
+    --shadow: rgba(255, 255, 255, 0.1);
+}

@@ -1,0 +1,26 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <h2>Iniciar sesión</h2>
+
+    <form [formGroup]="form" (ngSubmit)="login()">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password" type="password" />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="loading"><!--Ingresar-->
+        <ng-container *ngIf="!loading">Iniciar sesión</ng-container>
+        <ng-container *ngIf="loading">
+          <mat-spinner [diameter]="24"></mat-spinner>
+        </ng-container>
+      </button>
+
+      <div *ngIf="loading" class="loader">Cargando...</div>
+    </form>
+  </mat-card>
+</div>
