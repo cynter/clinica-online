@@ -31,6 +31,27 @@ export class LoginComponent {
     password: ['', [Validators.required]]
   });
 
+  autofill(tipo: 'paciente' | 'especialista' | 'admin') {
+    let email = '';
+    let password = '';
+    switch (tipo) {
+      case 'paciente':
+        email = 'samisaavedra96@hotmail.com';
+        password = 'samisaav';
+        break;
+      case 'especialista':
+        email = 'cynteran27@gmail.com';
+        password = '123456';
+        break;
+      case 'admin':
+        email = 'samisaavedra96@gmail.com';
+        password = 'samisaav';
+        break;
+    }
+    this.form.get('email')?.setValue(email);
+    this.form.get('password')?.setValue(password);
+  }
+
   async login() {
     if (this.form.invalid || this.loading) return;
 

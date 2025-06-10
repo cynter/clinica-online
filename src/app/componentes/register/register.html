@@ -40,6 +40,14 @@
 
     <mat-form-field appearance="fill" *ngIf="tipoUsuario() === 'especialista'">
       <mat-label>Especialidad</mat-label>
+      <mat-select [value]="form.value.especialidad" (selectionChange)="onEspecialidadChange($event.value)">
+        <mat-option *ngFor="let esp of especialidades" [value]="esp">{{ esp }}</mat-option>
+        <mat-option value="otra">Otra...</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" *ngIf="tipoUsuario() === 'especialista' && mostrarOtraEspecialidad">
+      <mat-label>Ingrese su especialidad</mat-label>
       <input matInput formControlName="especialidad" />
     </mat-form-field>
 

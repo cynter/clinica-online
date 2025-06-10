@@ -21,5 +21,5 @@ export const routes: Routes = [
     { path: 'especialista', component: Especialista, canActivate: [authGuard, verificadoGuard, especialistaGuard] },
     { path: 'paciente', component: Paciente, canActivate: [authGuard, verificadoGuard, pacienteGuard] },
 
-    { path: 'admin/usuarios', loadComponent: () => import('./componentes/admin/admin').then(m => m.Admin) }
+    { path: 'admin/usuarios', loadComponent: () => import('./componentes/admin-usuarios/admin-usuarios').then(m => m.AdminUsuarios), canActivate: [authGuard, verificadoGuard, adminGuard] }
 ];

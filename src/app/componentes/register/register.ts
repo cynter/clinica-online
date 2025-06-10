@@ -51,6 +51,17 @@ export class RegisterComponent {
 
   tipoUsuario = signal<'paciente' | 'especialista' | 'admin' | null>(null);
 
+  especialidades: string[] = [
+    'Cardiología',
+    'Dermatología',
+    'Pediatría',
+    'Traumatología',
+    'Clínica Médica',
+    'Oftalmología'
+  ];
+
+  mostrarOtraEspecialidad = false;
+
   form: FormGroup = this.fb.group({
     nombre: ['', Validators.required],
     apellido: ['', Validators.required],
@@ -66,6 +77,19 @@ export class RegisterComponent {
 
   onTipoChange(tipo: 'paciente' | 'especialista' | 'admin') {
     this.tipoUsuario.set(tipo);
+    if (tipo !== 'especialista') {
+      this.mostrarOtraEspecialidad = false;
+      this.form.get('especialidad')?.setValue('');
+    }
+  }
+
+  onEspecialidadChange(value: string) {
+    this.mostrarOtraEspecialidad = value === 'otra';
+    if (value !== 'otra') {
+      this.form.get('especialidad')?.setValue(value);
+    } else {
+      this.form.get('especialidad')?.setValue('');
+    }
   }
 
   async onSubmit() {
